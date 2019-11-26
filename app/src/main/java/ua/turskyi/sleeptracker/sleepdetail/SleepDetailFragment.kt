@@ -15,12 +15,6 @@ import ua.turskyi.sleeptracker.databinding.FragmentSleepDetailBinding
 
 /**
  * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [SleepDetailFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [SleepDetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
  */
 class SleepDetailFragment: Fragment() {
 
@@ -59,8 +53,6 @@ class SleepDetailFragment: Fragment() {
                 sleepDetailViewModel.doneNavigating()
             }
         })
-
         return binding.root
     }
-
 }

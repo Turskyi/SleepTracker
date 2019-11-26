@@ -39,8 +39,6 @@ class SleepDetailViewModel(
     }
 
     /**
-     * Variable that tells the fragment whether it should navigate to [SleepTrackerFragment].
-     *
      * This is `private` because we don't want to expose the ability to set [MutableLiveData] to
      * the [Fragment]
      */
@@ -73,5 +71,4 @@ class SleepDetailViewModel(
     fun onClose() {
         _navigateToSleepTracker.value = true
     }
-
 }

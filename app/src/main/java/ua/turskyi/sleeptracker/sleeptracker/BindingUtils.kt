@@ -9,7 +9,7 @@ import ua.turskyi.sleeptracker.convertNumericQualityToString
 import ua.turskyi.sleeptracker.database.SleepNight
 
 @BindingAdapter("sleepDurationFormatted")
-fun TextView.setSleepDurationFormated(item: SleepNight?) {
+fun TextView.setSleepDurationFormatted(item: SleepNight?) {
     item?.let {
         text = convertDurationToFormatted(item.startTimeMilli, item.endTimeMilli, context.resources)
     }

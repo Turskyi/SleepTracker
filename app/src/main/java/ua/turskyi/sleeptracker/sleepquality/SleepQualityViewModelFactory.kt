@@ -3,7 +3,6 @@ package ua.turskyi.sleeptracker.sleepquality
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import ua.turskyi.sleeptracker.database.SleepDatabaseDao
-import ua.turskyi.sleeptracker.sleeptracker.SleepTrackerViewModel
 
 class SleepQualityViewModelFactory(
     private val sleepNightKey: Long,

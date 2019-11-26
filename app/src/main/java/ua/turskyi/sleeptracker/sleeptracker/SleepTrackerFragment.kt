@@ -86,6 +86,13 @@ class SleepTrackerFragment : Fragment() {
             })
 
         val manager = GridLayoutManager(activity, 3)
+        //making header to place first three list items in order to look nice in the whole row
+        manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup(){
+            override fun getSpanSize(position: Int) = when (position) {
+                0 -> 3
+                else -> 1
+            }
+        }
         binding.sleepList.layoutManager = manager
 
         val adapter = SleepNightAdapter(SleepNightListener {

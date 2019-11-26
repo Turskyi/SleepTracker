@@ -9,7 +9,7 @@ buildscript {
         version_kotlin = "1.3.60"
         version_lifecycle_extensions = "2.1.0"
         version_navigation = '1.0.0'
-        version_room = "2.2.1"
+        version_room = "2.2.2"
     }
 
     repositories {

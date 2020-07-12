@@ -20,7 +20,32 @@ private const val ITEM_VIEW_TYPE_ITEM = 1
 
 class SleepNightAdapter(private val clickListener: SleepNightListener) :
     ListAdapter<DataItem, RecyclerView.ViewHolder>(SleepNightDiffCallback()) {
+
     private val adapterScope = CoroutineScope(Dispatchers.Default)
+
+    //class SleepNightDiffCallback : DiffUtil.ItemCallback<SleepNight>() {
+    class SleepNightDiffCallback : DiffUtil.ItemCallback<DataItem>() {
+        override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+//        return oldItem. == newItem
+            return oldItem.toString() == newItem.toString()
+        }
+    }
+
+    fun addHeaderAndSubmitList(list: List<SleepNight>?){
+        adapterScope.launch {
+            val items = when(list) {
+                null -> listOf(DataItem.Header)
+                else -> listOf(DataItem.Header) + list.map { DataItem.SleepNightItem(it) }
+            }
+            withContext(Dispatchers.Main) {
+                submitList(items)
+            }
+        }
+    }
 
 //    var data = listOf<SleepNight>()
 //        set(value) {
@@ -34,18 +59,6 @@ class SleepNightAdapter(private val clickListener: SleepNightListener) :
         return when (getItem(position)) {
             is DataItem.Header -> ITEM_VIEW_TYPE_HEADER
             is DataItem.SleepNightItem -> ITEM_VIEW_TYPE_ITEM
-        }
-    }
-
-    fun addHeaderAndSubmitList(list: List<SleepNight>?){
-        adapterScope.launch {
-            val items = when(list) {
-                null -> listOf(DataItem.Header)
-                else -> listOf(DataItem.Header) + list.map { DataItem.SleepNightItem(it) }
-            }
-            withContext(Dispatchers.Main) {
-                submitList(items)
-            }
         }
     }
 
@@ -68,7 +81,6 @@ class SleepNightAdapter(private val clickListener: SleepNightListener) :
             is ViewHolder -> {
                 val nightItem = getItem(position) as DataItem.SleepNightItem
                 holder.bind(nightItem.sleepNight, clickListener)
-
             }
         }
     }
@@ -135,18 +147,6 @@ class SleepNightAdapter(private val clickListener: SleepNightListener) :
                 return TextViewHolder(view)
             }
         }
-    }
-}
-
-//class SleepNightDiffCallback : DiffUtil.ItemCallback<SleepNight>() {
-class SleepNightDiffCallback : DiffUtil.ItemCallback<DataItem>() {
-    override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
-        return oldItem.id == newItem.id
-    }
-
-    override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
-//        return oldItem. == newItem
-        return oldItem.toString() == newItem.toString()
     }
 }
 
